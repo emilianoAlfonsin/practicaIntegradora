@@ -33,11 +33,15 @@ router.get("/product", async (req, res) => {
 });
 //create product
 router.post("/", async (req, res) => {
-  //validar con try catch
+  try{
   const newProduct = req.body;
-
   const result = await productManager.createProduct(newProduct);
   res.status(201).json({ result });
+  }
+  catch (error) {
+    console.error("Error al crear el producto:", error);
+    res.status(500).json({ error: "Error al crear el producto" });
+  }
 });
 
 //update product
@@ -58,6 +62,7 @@ router.put("/product/:id", async (req, res) => {
     res.status(500).json({ error: "Error al actualizar el producto" });
   }
 });
+
 //delete product
 router.delete("/product/:id", async (req, res) => {
   try {

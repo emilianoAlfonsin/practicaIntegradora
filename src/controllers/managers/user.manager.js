@@ -7,13 +7,23 @@ export default class UserManager {
   }
 
   getAll = async () => {
+    try {
     const result = await userModel.find();
     return result;
+    }
+    catch (error) {
+    console.log(error);
+    }
   };
 
   getById = async (id) => {
+    try {
     const result = await userModel.findById(id);
     return result;
+    }
+    catch (error) {
+    console.log(error);
+    }
   };
 
   createUser = async (userData) => {

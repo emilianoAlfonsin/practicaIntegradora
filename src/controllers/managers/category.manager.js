@@ -6,30 +6,55 @@ export default class CategoryManager {
   }
 
   getAll = async () => {
-    const result = await Category.find();
-    return result;
+    try {
+      const result = await Category.find();
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   getById = async (id) => {
-    const result = await Category.findById(id);
-    return result;
+    try {
+      const result = await Category.findById(id);
+      return result;
+    }
+    catch (error) {
+      console.log(error);
+    }
   };
 
   createCategory = async (category) => {
-    const result = await Category.create(category);
-    return result;
+    try {
+      const result = await Category.create(category);
+      return result;
+    }
+    catch (error) {
+      console.log(error);
+    }
   };
 
   updateCategory = async (id, categoryData) => {
-    const result = await Category.updateOne(
-      { _id: id },
-      { $set: categoryData }
-    );
-    return result;
+    try {
+      const result = await Category.updateOne(
+        { _id: id },
+        { $set: categoryData }
+      );
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   deleteCategory = async (id) => {
-    const result = await Category.deleteOne({ _id: id });
-    return result;
+    try {
+      const category = await Category.findById(id);
+      if (!category) {
+        throw new Error("Category not found");
+      }
+    }
+    catch (error) {
+      console.log(error);
+    }
   };
 }

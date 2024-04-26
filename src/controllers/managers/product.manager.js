@@ -4,29 +4,54 @@ export default class ProductManager {
   constructor() {
     console.log("Constructor ProductManager");
   }
+  
   getAll = async () => {
-    const result = await productModel.find();
-    return result;
+    try{
+      const result = await productModel.find();
+      return result;
+    }
+    catch(error){
+      console.log("No se pudo obtener los productos", error);
+    }
   };
   getById = async (id) => {
-    const result = await productModel.findById(id);
+    try {
+      const result = await productModel.findById(id);
+      return result;
+    } catch (error) {
+      console.log("No se pudo obtener el producto", error);      
+    }
+  };
 
-    return result;
-  };
   createProduct = async (product) => {
-    const result = await productModel.create(product);
-    return result;
+    try {
+      const result = await productModel.create(product);
+      return result;
+    } catch (error) {
+      console.log("No se pudo crear el producto", error);
+    }
   };
+
   updateProduct = async (id, productData) => {
-    const result = await productModel.updateOne(
-      { _id: id },
-      { $set: productData }
-    );
-    return result;
+    try {
+      const result = await productModel.updateOne(
+        { _id: id },
+        { $set: productData }
+      );
+      return result;
+    }
+    catch (error) {
+      console.log("No se pudo actualizar el producto", error);
+    }
   };
+
   deleteProduct = async (id) => {
-    const result = await productModel.deleleOne({ _id: id });
-    return result;
+    try {
+      const result = await productModel.deleteOne({ _id: id });
+      return result;
+    } catch (error) {
+      console.log("No se pudo eliminar el producto", error);
+    }
   };
 
   //buscar con categorias incluidas
