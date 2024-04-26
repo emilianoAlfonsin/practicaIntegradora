@@ -32,10 +32,28 @@ export default class ProductManager {
   //buscar con categorias incluidas
   getAllProductsWithCategories = async () => {
     //lógica a implementar
+    try {
+      const result = await productModel.find().populate("category");
+      return result;
+    }
+    catch (error) {
+      console.log("No se pudo obtener los productos poblados",error);
+    }
   };
   
   //paginate
   getPaginatedProducts = async (page = 1, limit = 10) => {
     //lógica a implementar
+    try {
+      const options = {
+        page: parseInt(page),
+        limit: parseInt(limit)
+      };
+      const result = await productModel.paginate({}, options);
+      return result;
+    }
+    catch (error) {
+      console.log("No se pudo obtener los productos paginados",error);
+    }
   };
 }

@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-//impotar paginate
+//importar paginate
+import mongoosePaginate from "mongoose-paginate-v2";
 
 const { Schema } = mongoose;
 
@@ -40,7 +41,7 @@ const userSchema = new Schema({
 });
 
 // Aplica el plugin de paginación
-
+userSchema.plugin(mongoosePaginate);
 
 const userModel = mongoose.model("User", userSchema);
 

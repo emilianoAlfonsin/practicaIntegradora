@@ -6,7 +6,15 @@ const productManager = new ProductManager();
 //get Products
 router.get("/products", async (req, res) => {
   //lógica a implementar
-  
+  try {
+    const { limit } = req.query;
+    const products = await productManager.getProducts(limit);
+    res.status(200).json({ products });
+  }
+  catch (error) {
+    console.log(`Error al cargar los productos: ${error}`);
+    res.status(500).json({ error: `Error al recibir los productos` });
+  }
 });
 //get Product
 router.get("/product", async (req, res) => {
